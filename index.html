@@ -1158,6 +1158,20 @@
         let selectedOption = null; // 用于存储当前选中的选项值
 		let mirrorRevealed = false;      // 标记是否已揭示
 		let mirrorContent = '';          // 存储完整镜子文字
+		
+		
+const MUSIC_BASE = 'https://github.com/suqi0626/M-s-30ty-Birthday/raw/refs/heads/main/';
+const pageMusic = {
+    pagePlanet1: MUSIC_BASE + '1.mp3',
+    pagePlanet2: MUSIC_BASE + '2.mp3',
+    pagePlanet3: MUSIC_BASE + '3.mp3',
+    pagePlanet4_enter: MUSIC_BASE + '4_1.mp3',
+    pagePlanet4_success: MUSIC_BASE + '4_2.mp3',
+    pagePlanet5: MUSIC_BASE + '5.mp3',
+    pagePlanet6: MUSIC_BASE + '6.mp3',
+    pageFinal: MUSIC_BASE + '7.mp3',
+    pageFox: MUSIC_BASE + '8.mp3'
+};
 
         // 正确答案
         const answers = {
@@ -1213,6 +1227,22 @@
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             currentPage = pageId;
+			
+			// 切换背景音乐
+let musicUrl = null;
+if (pageId === 'pagePlanet4') {
+    musicUrl = pageMusic.pagePlanet4_enter; // 进入爱好星球默认用4_1
+} else if (pageMusic[pageId]) {
+    musicUrl = pageMusic[pageId];
+}
+if (musicUrl) {
+    bgMusic.src = musicUrl;
+    if (musicPlaying) {
+        bgMusic.play().catch(() => {}); // 如果音乐状态为播放，则尝试播放
+    }
+}
+			
+			
             window.scrollTo(0, 0);
             // 如果在结局页且星星满6，显示麦穗入口
             if (pageId === 'pageFinal' && stars === 6) {
@@ -1236,7 +1266,12 @@
 
         // 按序号跳转星球 (1-6 分别对应 planet1-6, 7为结局)
         function goToPlanet(num) {
-            if (num === 1) goToPage('pagePlanet1');
+            if (currentPage === 'pagePrologue' && !musicPlaying) {
+        musicPlaying = true;
+        musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+			
+			if (num === 1) goToPage('pagePlanet1');
             else if (num === 2) goToPage('pagePlanet2');
             else if (num === 3) goToPage('pagePlanet3');
             else if (num === 4) goToPage('pagePlanet4');
@@ -1311,6 +1346,10 @@
                 document.getElementById('puzzle4').classList.add('hidden');
                 document.getElementById('story4').classList.remove('hidden');
                 selectedOption = null;
+				bgMusic.src = pageMusic.pagePlanet4_success;
+if (musicPlaying) {
+    bgMusic.play().catch(() => {});
+}
             } else {
                 alert('再想想，他那么喜欢和人一起玩，真的只是逃避吗？');
             }
