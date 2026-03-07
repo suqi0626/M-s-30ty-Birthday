@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>B-612号宇宙漫游指南</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,7 +15,7 @@
         }
 
         body {
-            font-family: 'Georgia', 'Times New Roman', '方正黑体', serif;
+            font-family: 'Cormorant Garamond', 'Noto Serif SC', 'Georgia', 'Times New Roman', serif;
             background-color: #0a0f1a;
             color: #e0e6f0;
             line-height: 1.7;
@@ -108,8 +109,8 @@
     border: 2px solid transparent;  /* 关键：保留边框占位但透明 */
     
     /* ✅ 要求2 & 3：统一 padding + 防止重叠 */
-    padding: 150px 20px;  /* 所有设备统一使用此值（已验证移动端兼容） */
-    min-height: calc(100vh - 120px);
+    padding: 20px 20px;  /* 所有设备统一使用此值（已验证移动端兼容） */
+
     box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 2px #5e3e2b, inset 0 0 30px #2a1e14;
     overflow: hidden;
 }
@@ -383,6 +384,8 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
         }
 
         .option-btn {
+		font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+font-weight: 600; /* 适当加粗 */
     background: rgba(60, 45, 30, 0.9);
     border: 2px solid #b28b5e;
     border-radius: 60px;
@@ -423,6 +426,63 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
 .rivet.left { left: 20%; }
 .rivet.right { right: 20%; }
 
+.ticket {
+    position: relative;
+    background: #f7e9d7;  /* 旧纸色 */
+    padding: 25px 20px;
+    margin: 20px 0;
+    border: 2px dashed #8b6b42;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 0 5px 0 #5e3e2b, 0 10px 20px rgba(0,0,0,0.3);
+    font-family: 'Courier New', '华文楷体', monospace;
+    color: #3a2a1a;
+    transform: rotate(-1deg);
+    max-width: 100%;
+}
+
+/* 穿孔边缘 */
+.ticket-hole {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #b28b5e;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px #f7e9d7;
+    z-index: 2;
+}
+.ticket-hole.bottom {
+    top: auto;
+    bottom: -5px;
+}
+
+.ticket-content {
+    position: relative;
+    z-index: 1;
+}
+
+.ticket-destination {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #5e3e2b;
+    text-align: center;
+    margin: 15px 0;
+    font-style: italic;
+}
+
+.ticket-stub {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #8b6b42;
+    border-top: 1px dotted #8b6b42;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+
+
         .input-field {
     width: 100%;
     padding: 16px 20px;
@@ -441,7 +501,15 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     box-shadow: 0 0 20px #e0b87b, inset 0 2px 5px #3a2a1a;
 }
 
+.input-field::placeholder {
+    font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+    color: #b28b5e;
+    opacity: 0.8;
+}
+
         .submit-btn {
+		font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+font-weight: 600; /* 适当加粗 */
     background: linear-gradient(145deg, #b28b5e, #8b6b42);
     color: #1e160f;
     border: none;
@@ -488,6 +556,8 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
 }
 
         .continue-btn {
+		font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+font-weight: 600; /* 适当加粗 */
     background: #b28b5e;
     color: #1e160f;
     border: none;
@@ -516,7 +586,7 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     max-width: 500px;
     height: 1000px;
     margin: 30px auto;
-    border: 4px solid #b28b5e;
+    border: 4px solid #b28b5e;          /* 基础边框 */
     border-radius: 30px;
     background: rgba(20, 15, 10, 0.7);
     backdrop-filter: blur(4px);
@@ -525,9 +595,13 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     justify-content: center;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 0 0 2px #5e3e2b, 0 0 0 4px #8b6b42, 0 20px 30px #000;
+    /* 两层阴影：内阴影加深，外阴影发光，宽度一致 */
+    box-shadow: 0 0 0 2px #5e3e2b,       /* 内层深色 */
+                0 0 0 4px #8b6b42,       /* 中层金色 */
+                0 20px 30px #000;         /* 外层投影 */
 }
 .mirror-text {
+font-family: 'Playfair Display', 'Noto Serif SC', serif;
     width: 100%;
     height: 100%;
     padding: 30px 25px;
@@ -681,6 +755,114 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
 }
 		
 		
+		/* 首页头图区域 */
+.header-illustration {
+    position: relative;
+    width: 100%;
+    max-width: 600px;      /* 与容器宽度匹配，可根据需要调整 */
+    margin: 0 auto 20px;   /* 居中并留出下方间距 */
+    height: 180px;         /* 固定高度，根据实际背景图高度调整 */
+    overflow: visible;
+}
+
+/* 背景图 */
+.header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* 铺满整个区域，可能裁剪；如需完整显示改为 contain */
+    border-radius: 20px;   /* 可选圆角 */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+/* 所有浮动小插图通用样式 */
+.floating-icon {
+    position: absolute;
+    width: 60px;           /* 基础大小，可单独调整 */
+    height: auto;
+    cursor: pointer;
+    z-index: 2;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+    transition: transform 0.2s;
+}
+
+.floating-icon:hover {
+    transform: scale(1.1);
+}
+
+/* 首页头图区域 - 调整高度与元素位置 */
+.header-illustration {
+    position: relative;
+    width: 100%;
+    width: 200px;
+    margin-bottom: 90px;  /* 下方留出距离，可根据实际调整 */
+    height: 160px;          /* 增加高度，让背景图更明显（可根据实际图片微调） */
+    overflow: visible;
+}
+
+/* 背景图 */
+.header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* 铺满整个区域，如果图片被裁剪可改为 contain 并添加背景色 */
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+/* 所有浮动小插图通用样式 */
+.floating-icon {
+    position: absolute;
+    width: auto;            /* 由具体尺寸控制 */
+    height: auto;
+    cursor: pointer;
+    z-index: 2;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.3));
+    transition: transform 0.2s;
+}
+
+.floating-icon:hover {
+    transform: scale(1.1);
+}
+
+/* shouyexiaotu - 放置在正中间 */
+.icon1 {
+    top: 60%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    width: 40px;            /* 适当大小，可调整 */
+    animation: float 3s ease-in-out infinite;
+}
+
+/* xingxing - 放置在最上面居中 */
+.icon2 {
+    top: 5px;
+    left:60%;
+    transform: translateX(-50%);
+    width: 65px;
+    animation: spin 6s linear infinite;
+}
+
+/* 狐狸 - 放置在最右边 */
+.icon3 {
+    bottom: 10px;
+    right: 10%;
+    width: 65px;
+    animation: sway 2s ease-in-out infinite;
+}
+
+/* 确保所有需要的动画存在（如果缺少 spin 请补充） */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+		
       
 
         /* ===== 隐藏类 ===== */
@@ -718,6 +900,8 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
         }
 
         .twenty-one {
+		font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+font-weight: 600; /* 适当加粗 */
     text-align: center;
     margin: 40px 0 20px;
     font-size: 1.3rem;
@@ -738,17 +922,16 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
 
         /* ===== 结局页镜子样式 ===== */
         .mirror-text {
+		font-family: 'Playfair Display', 'Noto Serif SC', serif;
             font-size: 1.3rem;
             text-align: center;
             color: gold;
-            border: 2px solid #b28b5e;
-            border-radius: 40px;
+            border: none;
             padding: 30px 20px;
             background: rgba(0,0,0,0.6);
             backdrop-filter: blur(4px);
             line-height: 2;
             margin: 30px 0;
-            box-shadow: 0 0 30px gold;
         }
 
         .final-quote {
@@ -760,6 +943,8 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
         }
 
         .nav-btn {
+		font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+font-weight: 600; /* 适当加粗 */
     background: transparent;
     border: 2px solid #b28b5e;
     color: #b28b5e;
@@ -810,10 +995,183 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     z-index: 2;
 }
 
+/* 童年星球插画区容器 */
+.planet1-illustration {
+    position: relative;
+    width: 100%;
+    max-width: 500px;        /* 限制最大宽度，防止过宽 */
+    height: 200px;           /* 固定高度，可根据实际图片高度调整 */
+    margin: 20px auto 30px;  /* 上下留出间距 */
+    background: transparent;  /* 无背景，透出星空 */
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+/* 所有图标通用样式 */
+.planet1-icon {
+    position: absolute;
+    width: 100px;            /* 基础宽度，可根据实际图片比例调整 */
+    height: auto;
+    filter: drop-shadow(0 5px 15px rgba(180, 140, 80, 0.6)) 
+            drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+    transition: transform 0.3s ease;
+    pointer-events: auto;    /* 如果需要点击可改为 auto，但此处仅为装饰 */
+}
+
+/* 左图标：绘画工具 */
+.icon-left {
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;             /* 适当调整大小 */
+    animation: float 3s ease-in-out infinite;
+}
+
+/* 中图标：画架 */
+.icon-center {
+    left: 20%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    width: 180px;            /* 画架可以稍大 */
+    animation: sway 2.5s ease-in-out infinite;
+}
+
+/* 右图标：摄像机 */
+.icon-right {
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 95px;
+    animation: blink 1.5s step-end infinite; /* 闪动效果 */
+}
+
+/* 闪动动画（明暗交替，模拟摄像机闪光） */
+@keyframes blink {
+    0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px gold); }
+    50% { opacity: 0.6; filter: drop-shadow(0 0 20px #ffaa33); }
+}
+
+/* 可选：悬停时轻微放大，增加互动感（如果需要可去掉 pointer-events: none） */
+.planet1-icon:hover {
+    transform: scale(1.05) translateY(-50%); /* 注意同时保持居中 */
+    filter: drop-shadow(0 0 25px gold);
+    transition: 0.2s;
+}
 
 
+/* 闪烁动画 */
+@keyframes blink {
+    0% { opacity: 1; transform: scale(1); }
+    30% { opacity: 0.5; transform: scale(1.05); }
+    50% { opacity: 1; transform: scale(1); }
+    70% { opacity: 0.7; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
+}
 
-	
+/* 如果已有 float/sway 动画则无需重复，否则补充 */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes sway {
+    0% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+    100% { transform: rotate(-3deg); }
+}
+
+/* 胶片风格容器 */
+.film-strip {
+	font-family: 'Playfair Display', 'Noto Serif SC', 'Georgia', serif;
+    background: rgba(20, 15, 10, 0.8);
+    border: 2px solid #b28b5e;
+    border-radius: 20px;
+    padding: 25px 20px;
+    margin: 20px 0;
+    color: #f0e6d2;
+    font-size: 1rem;
+    line-height: 1.8;
+    position: relative;
+    box-shadow: 0 0 30px rgba(180, 140, 80, 0.5), inset 0 0 20px #2a1e14;
+    min-height: 150px; /* 保证容器有足够高度 */
+}
+
+/* 胶片孔洞装饰 */
+.film-strip::before,
+.film-strip::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    width: 15px;
+    background: repeating-linear-gradient(
+        to bottom,
+        #b28b5e,
+        #b28b5e 8px,
+        transparent 8px,
+        transparent 16px
+    );
+    opacity: 0.6;
+    border-radius: 4px;
+}
+
+.film-strip::before {
+    left: 5px;
+}
+.film-strip::after {
+    right: 5px;
+}
+
+/* 打字光标效果（可选） */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: gold;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+/* 金色粒子容器 */
+.golden-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+/* 单个粒子 */
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #ffd966, #b28b5e);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ffd966;
+    opacity: 0.7;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(100vh) translateX(0) rotate(0deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100px) translateX(50px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
 	
 	</style>
 </head>
@@ -843,16 +1201,33 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     <!-- ========== 序幕 ========== -->
     <section class="page active" id="pagePrologue">
         <div class="container">
-            <div class="illustration-area" style="justify-content: flex-end;">
-    <img src="http://m-birthday-music.test.upcdn.net/huli.png" alt="狐狸剪影" class="fox-illustration float">
+		
+		<!-- 首页头图区域：整体背景 + 浮动小插图 -->
+<div class="header-illustration">
+    <!-- 整体背景图 -->
+    <img src="http://m-birthday-music.test.upcdn.net/xiaobeijing.png" alt="头图背景" class="header-bg">
+    <!-- 浮动小插图 -->
+    <img src="http://m-birthday-music.test.upcdn.net/shouyexiaotu.png" alt="小插图1" class="floating-icon icon1" id="shouyeIcon">
+    <img src="http://m-birthday-music.test.upcdn.net/xingxing.png" alt="小插图2" class="floating-icon icon2" id="xingxingIcon">
+    <img src="http://m-birthday-music.test.upcdn.net/huli.png" alt="狐狸" class="floating-icon icon3" id="foxIcon">
 </div>
+
+       
             <h1 class="chapter-title" style="text-align: center;">B-612号宇宙漫游指南</h1>
             <p class="chapter-subtitle" style="text-align: center;">一位匿名星际向导为你定制的自我探索之旅</p>
 
             <div class="scene-card">
                 <p>在遥远的B-612小行星上，住着一个小王子。他每天打扫火山，拔除猴面包树，照顾一朵玫瑰。但后来他离开了，去拜访其他星球，遇到了国王、商人、点灯人，还有一只狐狸。</p>
                 <p>狐狸告诉他：“重要的东西用眼睛是看不见的。”</p>
-                <p>今天，你收到一张没有寄件人的船票，它夹在你常看的那本诗集里。票面上用歪歪扭扭的字体写着：“请前往B-612号宇宙，拜访那些你从未见过的自己。”</p>
+                <p>今天，你收到一张没有寄件人的船票，它夹在你常看的那本诗集里。票面上用歪歪扭扭的字体写着：</p>
+				<div class="ticket">
+    <div class="ticket-hole"></div>
+    <div class="ticket-content">
+        <p class="ticket-destination">“请前往B-612号宇宙，拜访那些你从未见过的自己。”</p>
+        <div class="ticket-stub">B-612 · 单程</div>
+    </div>
+    <div class="ticket-hole bottom"></div>
+</div>
                 <p>它将带你飞过六个星球，每个星球上都有一个你——你曾经的模样、你藏起来的渴望、你不敢承认的恐惧、你偷偷喜欢的旋律、你沉默时的叹息、你未来想成为的人。</p>
                 <p>向导不会出现，但会留下线索。当你走完这段旅程，你将收到一份礼物：关于你自己的真相。</p>
                 <p>注意：在每个星球上，你需要回答一个关于你自己的问题。答案只有你知道。如果你诚实，星星会为你点亮。</p>
@@ -868,16 +1243,17 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
 
     <!-- ========== 童年星球 ========== -->
     <section class="page" id="pagePlanet1">
+
         <div class="container">
+		
             <h2 class="chapter-title">童年星球 · 未完成的画</h2>
-			
-			<!-- 插画区：画架(左) 摄影机(右) 颜料(散落) -->
-            <div class="illustration-area">
-                <div class="placeholder placeholder-md float" style="align-self: flex-start;">🖼️ 旧画架+未完成画</div>
-                <div class="placeholder placeholder-md sway" style="align-self: flex-end;">📽️ 老式摄影机</div>
-                <div class="placeholder placeholder-sm" style="width:60px; height:60px;">🎨 颜料管</div>
-                <div class="placeholder placeholder-sm" style="width:60px; height:60px;">🖌️ 颜料管</div>
-            </div>
+			<div class="golden-particles" id="particles"></div>
+			<!-- 童年星球插画区：高级浮动图像组合 -->
+<div class="planet1-illustration">
+    <img src="http://m-birthday-music.test.upcdn.net/huihuagongju.png" alt="绘画工具" class="planet1-icon icon-left" id="toolIcon">
+    <img src="http://m-birthday-music.test.upcdn.net/hua.png" alt="画架" class="planet1-icon icon-center" id="huaIcon">
+    <img src="http://m-birthday-music.test.upcdn.net/shexiangji.png" alt="摄像机" class="planet1-icon icon-right" id="camIcon">
+</div>
 			
             <div class="scene-card">
                 <p>你降落在一个很小的星球上。光线柔和得像童年的傍晚，带着淡淡的金色，洒在每一寸土地上。这里有一个旧画架，画架上是一幅未完成的画——只有铅笔勾勒的轮廓，隐约能看出是一个人的背影，站在一片麦田前，麦浪被风吹出温柔的弧度。画架旁边散落着几管颜料，颜色都有些干了，像被遗忘的时光。不远处，一台老式胶片摄影机静静地架在那里，镜头对准画架，仿佛在等待某个瞬间被按下快门。摄影机旁边有一个木质相框，里面是一张微微泛黄的照片，但照片上的人影模糊不清，只能看到一片光影，像是某个故事的开头。</p>
@@ -906,7 +1282,8 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
          style="width: 100%; max-width: 250px; border-radius: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
 </div>
 			    <p>摄影机里缓缓吐出一段胶片，胶片上浮现出一行行文字：</p>
-                <p>“是的，那个故事。他曾经用镜头讲述过一个关于成长的短片，每一个镜头都经过反复打磨，每一个画面都藏着他对世界的理解。那时他还很年轻，不懂得隐藏，不怕表达，也不怕被人看见。他站在摄像机后面，指挥着很多人，心里既紧张又兴奋。后来，他很少再提起它，不是忘记了，是怕现在的自己配不上曾经的骄傲。”</p>
+				<div class="film-strip" id="typewriterText"></div>
+                
                 <p>胶片继续转动，画面切换到那个少年拍片的场景：他蹲在地上调整灯光，他踮起脚尖调整镜头，他和演员说戏时认真的侧脸。最后，画面定格在那个少年对着镜头微笑的瞬间，那笑容清澈而真实，像是世界还未曾让他疲惫。</p>
                 <p>画架下方，原本空白的地方浮现出一行小字：<br>“那个少年还在。他只是在等一个机会，重新拿起画笔或摄像机，讲一个关于自己的故事。”</p>
                 <p>摄影机里的胶卷缓缓转出，落在地上，变成一颗发光的星星碎片，上面刻着：<br>“他曾是导演，也是自己故事的主角。”</p>
@@ -1429,6 +1806,45 @@ const pageMusic = {
                 starfield.appendChild(star);
             }
         }
+		
+		
+		// 生成童年星球的漂浮金色粒子
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+    const numberOfParticles = 30; // 粒子数量
+    for (let i = 0; i < numberOfParticles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // 随机大小
+        const size = Math.random() * 10 + 3;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        // 随机起始位置（横向）
+        particle.style.left = Math.random() * 100 + '%';
+        
+        // 随机动画持续时间（4s ~ 10s）
+        const duration = Math.random() * 6 + 4;
+        particle.style.animationDuration = duration + 's';
+        
+        // 随机动画延迟
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        
+        particlesContainer.appendChild(particle);
+    }
+}
+
+// 在页面切换时，如果切换到童年星球，则重新生成粒子（防止重复）
+function generateParticlesForPlanet1() {
+    const container = document.getElementById('particles');
+    if (container) {
+        container.innerHTML = ''; // 清空原有粒子
+        createParticles();
+    }
+}
+		
 
         // 页面切换
        function goToPage(pageId) {
@@ -1448,6 +1864,11 @@ const pageMusic = {
     next.classList.add('active');
     next.style.display = 'block';
     currentPage = pageId;
+	
+	
+	if (pageId === 'pagePlanet1') {
+    generateParticlesForPlanet1();
+}
 
     // 音乐 & 滚动逻辑（保持不变）
     let musicUrl = null;
@@ -1546,6 +1967,29 @@ const pageMusic = {
             const submitBtn = parent.parentNode.querySelector('.submit-btn');
             if (submitBtn) submitBtn.disabled = false;
         }
+		
+		
+		
+		
+		// 打字机效果函数
+function typeWriter(text, elementId, speed = 50) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.innerHTML = ''; // 清空容器
+    let i = 0;
+    const timer = setInterval(() => {
+        if (i < text.length) {
+            el.innerHTML += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(timer);
+            // 可选：移除光标
+            el.classList.remove('typing-cursor');
+        }
+    }, speed);
+    el.classList.add('typing-cursor'); // 添加光标
+}
+		
 
         // 各星球答案检查
         function checkPlanet1() {
@@ -1555,6 +1999,13 @@ const pageMusic = {
 				celebrateWithStars(); // 添加烟花效果
                 document.getElementById('puzzle1').classList.add('hidden');
                 document.getElementById('story1').classList.remove('hidden');
+				
+				// 延迟30秒后开始打字效果
+        setTimeout(() => {
+            const filmText = `“是的，那个故事。他曾经用镜头讲述过一个关于成长的短片，每一个镜头都经过反复打磨，每一个画面都藏着他对世界的理解。那时他还很年轻，不懂得隐藏，不怕表达，也不怕被人看见。他站在摄像机后面，指挥着很多人，心里既紧张又兴奋。后来，他很少再提起它，不是忘记了，是怕现在的自己配不上曾经的骄傲。”`;
+            typeWriter(filmText, 'typewriterText', 80);
+        }, 10000); // 30000毫秒 = 30秒
+				
             } else {
                 alert('再想想，和镜头有关，和那个让他骄傲的学生时代的夏天有关。');
             }
