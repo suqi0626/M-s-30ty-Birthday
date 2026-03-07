@@ -94,17 +94,66 @@
             z-index: 10;
         }
 
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: rgba(20, 25, 35, 0.6);
-            backdrop-filter: blur(12px);
-            border-radius: 48px;
-            padding: 30px 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,215,0,0.2);
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-		
+
+		.container {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    background: rgba(40, 30, 20, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 40px;
+    padding: 150px 20px 150px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 2px #5e3e2b, inset 0 0 30px #2a1e14;
+    border: none;                /* 移除原有边框 */
+    z-index: 1;
+}
+
+/* 上边框 */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -10px;                  /* 向上偏移，让边框悬浮在容器上方 */
+    left: 0;
+    width: 100%;
+    height: 50px;                /* 根据 SVG 中边框图案的高度调整 */
+    background-image: url('http://m-birthday-music.test.upcdn.net/shangbianxian.png');
+    background-size: 100% 100%;  /* 宽度100%拉伸，高度固定，避免上下变形 */
+    background-repeat: no-repeat;
+    background-position: top center; /* 从顶部开始显示，确保图案朝上 */
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.9;                   /* 提高不透明度使图案更清晰 */
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6))   /* 向下投影，增强立体感 */
+            drop-shadow(0 0 2px #b28b5e)              /* 金色光晕 */
+            drop-shadow(0 0 5px #ffd966);              /* 暖色高光 */
+    /* 添加内发光模拟浮雕边缘 */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+/* 下边框 */
+.container::after {
+    content: '';
+    position: absolute;
+    bottom: -55px;               /* 向下偏移 */
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-image: url('http://m-birthday-music.test.upcdn.net/xiabianxian.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom center; /* 从底部开始显示，图案朝下 */
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.9;                   /* 提高不透明度使图案更清晰 */
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6))   /* 向下投影，增强立体感 */
+            drop-shadow(0 0 2px #b28b5e)              /* 金色光晕 */
+            drop-shadow(0 0 5px #ffd966);              /* 暖色高光 */
+    /* 添加内发光模拟浮雕边缘 */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+}
 
 		
 		.page::after {
@@ -121,31 +170,7 @@
     padding-top: 15px;
 }
 		
-		/* 磨砂玻璃卡片容器 */
-.container {
-    max-width: 700px;
-    margin: 0 auto;
-    background: rgba(40, 30, 20, 0.55);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: 40px;
-    padding: 25px 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 2px #b99a6b, 0 0 0 4px #5e4b3c;
-    border: 1px solid #e0b87b;
-    position: relative;
-}
-/* 添加破损边缘效果 */
-.container::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    border-radius: 42px;
-    border: 2px dashed rgba(180, 140, 80, 0.3);
-    pointer-events: none;
-}
+
 .container::after {
     content: '✧';
     position: absolute;
@@ -374,6 +399,20 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     box-shadow: 0 0 30px #ffaa33, inset 0 2px 5px #fff1d6;
 }
 
+.rivet {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(circle at 30% 30%, #e0b87b, #5e3e2b);
+    border-radius: 50%;
+    border: 1px solid #b28b5e;
+    box-shadow: 0 2px 4px #000;
+}
+.rivet.left { left: 20%; }
+.rivet.right { right: 20%; }
+
         .input-field {
     width: 100%;
     padding: 16px 20px;
@@ -415,6 +454,15 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
 .submit-btn:active {
     transform: translateY(4px);
     box-shadow: 0 4px 0 #5e3e2b, 0 5px 15px #b28b5e;
+}
+
+.submit-btn {
+    animation: buttonGlow 3s infinite;
+}
+@keyframes buttonGlow {
+    0% { box-shadow: 0 8px 0 #5e3e2b, 0 10px 20px rgba(0,0,0,0.4); }
+    50% { box-shadow: 0 8px 0 #5e3e2b, 0 0 30px #ffaa33; }
+    100% { box-shadow: 0 8px 0 #5e3e2b, 0 10px 20px rgba(0,0,0,0.4); }
 }
 
         /* ===== 成功故事区域 ===== */
@@ -490,6 +538,15 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     width: auto;
     height: 120px; /* 根据占位符尺寸调整，可改用 max-width */
     max-width: 100%;
+}
+
+#pagePrologue .fox-illustration {
+    filter: drop-shadow(0 0 15px #b28b5e) drop-shadow(0 0 30px #ffaa33);
+    animation: tailWag 4s infinite alternate;
+}
+@keyframes tailWag {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(5deg); }
 }
 
         /* ===== 固定UI ===== */
@@ -745,6 +802,7 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
 
 
 
+
 	
 	
 	</style>
@@ -769,6 +827,8 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     <div class="wheat-egg" id="wheatEgg" onclick="goToFoxPage()">
         <i class="fas fa-wheat-alt"></i>
     </div>
+	
+	
 
     <!-- ========== 序幕 ========== -->
     <section class="page active" id="pagePrologue">
@@ -787,7 +847,11 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
                 <p>向导不会出现，但会留下线索。当你走完这段旅程，你将收到一份礼物：关于你自己的真相。</p>
                 <p>注意：在每个星球上，你需要回答一个关于你自己的问题。答案只有你知道。如果你诚实，星星会为你点亮。</p>
             </div>
-            <button class="submit-btn" onclick="goToPlanet(1)">启程</button>
+            <div style="position: relative; display: inline-block; width: 100%;">
+    <button class="submit-btn" onclick="goToPlanet(1)">启程</button>
+    <span class="rivet left"></span>
+    <span class="rivet right"></span>
+</div>
 			<div class="headphone-tip">请佩戴耳机观看</div>
         </div>
     </section>
