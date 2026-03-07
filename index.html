@@ -103,56 +103,66 @@
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-radius: 40px;
-    padding: 150px 20px 150px;
+    /* ✅ 移除原 padding，改用 min-height + 内容偏移 */
+	/* ✅ 要求1：自身边框设为透明 */
+    border: 2px solid transparent;  /* 关键：保留边框占位但透明 */
+    
+    /* ✅ 要求2 & 3：统一 padding + 防止重叠 */
+    padding: 150px 20px;  /* 所有设备统一使用此值（已验证移动端兼容） */
+    min-height: calc(100vh - 120px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 2px #5e3e2b, inset 0 0 30px #2a1e14;
-    border: none;                /* 移除原有边框 */
-    z-index: 1;
+    overflow: hidden;
 }
 
-/* 上边框 */
-.container::before {
-    content: '';
-    position: absolute;
-    top: -10px;                  /* 向上偏移，让边框悬浮在容器上方 */
-    left: 0;
-    width: 100%;
-    height: 50px;                /* 根据 SVG 中边框图案的高度调整 */
-    background-image: url('http://m-birthday-music.test.upcdn.net/shangbianxian.png');
-    background-size: 100% 100%;  /* 宽度100%拉伸，高度固定，避免上下变形 */
-    background-repeat: no-repeat;
-    background-position: top center; /* 从顶部开始显示，确保图案朝上 */
-    pointer-events: none;
-    z-index: 2;
-    opacity: 0.9;                   /* 提高不透明度使图案更清晰 */
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6))   /* 向下投影，增强立体感 */
-            drop-shadow(0 0 2px #b28b5e)              /* 金色光晕 */
-            drop-shadow(0 0 5px #ffd966);              /* 暖色高光 */
-    /* 添加内发光模拟浮雕边缘 */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+/* 内容区域真实 padding（通过 :first-child 与 :last-child 控制） */
+.container > *:first-child {
+    margin-top: 150px;
+}
+.container > *:last-child {
+    margin-bottom: 150px;
+}
+.container > * {
+    padding: 0 20px;
 }
 
-/* 下边框 */
+/* 伪元素边框：用 transform 代替 top/bottom 负值 */
+.container::before,
 .container::after {
     content: '';
     position: absolute;
-    bottom: -55px;               /* 向下偏移 */
     left: 0;
     width: 100%;
     height: 50px;
-    background-image: url('http://m-birthday-music.test.upcdn.net/xiabianxian.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-position: bottom center; /* 从底部开始显示，图案朝下 */
     pointer-events: none;
     z-index: 2;
-    opacity: 0.9;                   /* 提高不透明度使图案更清晰 */
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6))   /* 向下投影，增强立体感 */
-            drop-shadow(0 0 2px #b28b5e)              /* 金色光晕 */
-            drop-shadow(0 0 5px #ffd966);              /* 暖色高光 */
-    /* 添加内发光模拟浮雕边缘 */
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6)) drop-shadow(0 0 2px #b28b5e);
+}
+
+.container::before {
+    top: 0;
+    background-image: url('http://m-birthday-music.test.upcdn.net/shangbianxian.png');
+    transform: translateY(-1px);
+	opacity: 0.9;
+    filter: drop-shadow(0 -4px 6px rgba(0,0,0,0.6))  /* 向上投影（下边框的立体感） */
+            drop-shadow(0 0 2px #b28b5e)
+            drop-shadow(0 0 5px #ffd966);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.container::after {
+    bottom: 0;
+    background-image: url('http://m-birthday-music.test.upcdn.net/xiabianxian.png');
+    transform: translateY(7px);
+	opacity: 0.9;
+    filter: drop-shadow(0 -4px 6px rgba(0,0,0,0.6))  /* 向上投影（下边框的立体感） */
+            drop-shadow(0 0 2px #b28b5e)
+            drop-shadow(0 0 5px #ffd966);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%);
 }
 
 		
@@ -352,7 +362,7 @@ text-shadow: 0 0 15px #ffd966, 2px 2px 4px #3a2a1a;
     backdrop-filter: blur(4px);
     border-radius: 28px;
     padding: 25px;
-    margin: 30px 0;
+    margin: 30px 0 50px;
     border: 2px solid #c9a87c;
     box-shadow: 0 0 20px #c9a87c, inset 0 0 10px #5e4b3c;
 }
