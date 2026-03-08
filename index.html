@@ -1103,6 +1103,8 @@ font-weight: 600; /* 适当加粗 */
     animation: magicSparkle 6s infinite linear;
     pointer-events: none;
     z-index: -1;
+	filter: blur(45px);    /* 新增：模糊边缘，消除硬边 */
+    opacity: 0.8;           /* 可选：调整透明度使光晕更柔和 */
 }
 
 /* 闪烁小星星 */
@@ -1165,6 +1167,8 @@ font-weight: 600; /* 适当加粗 */
     background: radial-gradient(circle at 50% 50%, rgba(255,215,0,0.2), transparent 70%);
     animation: rotateGlow 8s infinite linear;
     z-index: -1;
+	filter: blur(45px);    /* 新增：模糊边缘，消除硬边 */
+    opacity: 0.8;           /* 可选：调整透明度使光晕更柔和 */
 }
 
 @keyframes noticeFloat {
