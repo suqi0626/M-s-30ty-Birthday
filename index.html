@@ -682,8 +682,8 @@ font-weight: 600; /* 适当加粗 */
     position: relative;
     width: 100%;
     max-width: 500px;
-    height: 1000px;          /* 可根据边框图片比例调整 */
-    margin: 30px auto;
+    height: 600px;          /* 可根据边框图片比例调整 */
+    margin: 5px auto 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -712,9 +712,9 @@ font-weight: 600; /* 适当加粗 */
     position: relative;
     z-index: 1;
     width: 60%;
-    height: 100%;
+    height: 80%;
     padding: 15px auto 15px;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     text-align: center;
     color: gold;
     font-family: 'Playfair Display', 'Noto Serif SC', serif;
@@ -729,6 +729,7 @@ font-weight: 600; /* 适当加粗 */
     text-shadow: 0 0 5px gold, 2px 2px 2px #000;
     transition: opacity 2s ease;
 	transform: translateX(-5%); /* 左移5% */
+	top: -15px;
 }
 
 /* 文字逐行浮现动画 */
@@ -3656,8 +3657,18 @@ function showProgress() {
     } else {
         completeMsg.style.display = 'none';
     }
+ if (modalContent) {
+        modalContent.scrollTop = 0;
+    }
 
     modal.style.display = 'flex';
+	
+	// 然后延迟一小段时间强制滚动到顶部（确保布局完成）
+    setTimeout(() => {
+        if (modalContent) {
+            modalContent.scrollTop = 0;
+        }
+    }, 10);
 }
 
 // 关闭模态框
@@ -4123,7 +4134,12 @@ function collectItem(index) {
             icon.style.transition = 'all 0.3s';
         }
     } else {
-        alert('你已经拾取过这个物品了');
+        // 显示自定义提示
+    const msg = document.createElement('div');
+    msg.className = 'collect-item-message';
+    msg.innerHTML = '你已经拾取过这个物品了';
+    document.body.appendChild(msg);
+    setTimeout(() => msg.remove(), 2000);
     }
 }
 
