@@ -782,7 +782,13 @@ font-weight: 600; /* 适当加粗 */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: rgba(40, 30, 20, 0.1);
+    background: rgba(25, 20, 15, 0.3);
+    background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 210, 150, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(200, 190, 240, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 40% 70%, rgba(230, 180, 130, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(170, 220, 240, 0.1) 0%, transparent 55%),
+        radial-gradient(circle at 50% 40%, rgba(240, 200, 160, 0.1) 0%, transparent 60%);
 	backdrop-filter: blur(12px);
 	border-radius: 40px;
     text-shadow: 0 0 5px gold, 2px 2px 2px #000;
@@ -1055,9 +1061,35 @@ font-weight: 600; /* 适当加粗 */
 		
 		/* 狐狸页 */
         .fox-page-content {
+		background: rgba(45, 35, 25, 0.4) !important; /* 覆盖内联样式 */
+    background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 220, 150, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(255, 190, 100, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 30% 75%, rgba(250, 210, 130, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(230, 190, 255, 0.1) 0%, transparent 55%),
+        radial-gradient(circle at 45% 40%, rgba(255, 200, 120, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(240, 180, 100, 0.1) 0%, transparent 60%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
             font-size: 1rem;
             line-height: 1.8;
+			border-radius: 40px;
+    border: none;
+    box-shadow: 
+        0 20px 40px rgba(0,0,0,0.8),
+        0 0 0 1px rgba(220, 170, 100, 0.6),
+        0 0 0 2px rgba(150, 100, 50, 0.4),
+        0 0 0 4px rgba(200, 150, 80, 0.2),
+        inset 0 0 30px rgba(30, 20, 10, 0.8),
+        inset 0 0 20px rgba(255, 200, 120, 0.2);
+    animation: foxGlow 12s infinite alternate ease-in-out;
+	
         }
+		
+		@keyframes foxGlow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 3% 2%; }
+}
 
  /* ===== 手机字号优化 ===== */
 @media (max-width: 600px) {
@@ -1367,7 +1399,13 @@ font-weight: 600; /* 适当加粗 */
         .nav-btn {
 		font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
 font-weight: 600; /* 适当加粗 */
-    background: transparent;
+    background: rgba(25, 20, 15, 0.3);
+    background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 210, 150, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(200, 190, 240, 0.15) 0%, transparent 45%),
+        radial-gradient(circle at 40% 70%, rgba(230, 180, 130, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(170, 220, 240, 0.1) 0%, transparent 55%),
+        radial-gradient(circle at 50% 40%, rgba(240, 200, 160, 0.1) 0%, transparent 60%);
     border: 2px solid #b28b5e;
     color: #b28b5e;
     border-radius: 60px;
@@ -3381,7 +3419,7 @@ font-weight: 600; /* 适当加粗 */
 
     <!-- ========== 狐狸星球（彩蛋） ========== -->
     <section class="page" id="pageFox">
-        <div class="container" style="background: rgba(58,44,31,0.8);">
+        <div class="container"">
            
 			
 			<img src="http://m-birthday-music.test.upcdn.net/tcaidan.png" 
@@ -3399,7 +3437,7 @@ font-weight: 600; /* 适当加粗 */
 </div>
 			<div class="collect-hint">✨ 这幅画的某些地方好像可以点击一下？ ✨</div>
 
-            <div class="scene-card fox-page-content" style="background: #2e231b; border: 1px solid #b28b5e; box-shadow: inset 0 0 30px #1a130e;">
+            <div class="scene-card fox-page-content">
                 <p>你睁开眼睛，发现自己站在一片无边无际的金色麦田里。</p>
                 <p>风从远处吹来，麦浪一层一层地涌向你，又退回去，发出沙沙的轻响，像大地在低声说着什么。天空是暖橙色的，分不清是日出还是黄昏——那种介于告别和重逢之间的光。</p>
                 <p>你往前走，麦田里有一条若隐若现的小路，是被什么动物踩出来的。路两旁偶尔会出现一些小小的物件：一根掉落的羽毛、一颗圆润的石子、一朵压干的野花。它们像是路标，又像是某个谁留下的礼物。</p>
