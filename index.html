@@ -2875,6 +2875,84 @@ font-weight: 600; /* 适当加粗 */
     50% { opacity: 1; }
     100% { opacity: 0.7; }
 }
+
+
+/* 星图收集册内的彩蛋星星 - 按钮样式 */
+.easter-egg-star {
+    display: inline-block;
+    padding: 8px 20px;
+    background: linear-gradient(145deg, #b28b5e, #8b6b42);
+    border-radius: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff8e7;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #5e3e2b, 0 4px 12px rgba(0,0,0,0.4);
+    transition: all 0.2s ease;
+    text-shadow: 0 1px 1px #3a2a1a;
+    letter-spacing: 2px;
+    animation: starPulse 2s infinite;
+}
+.easter-egg-star:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #5e3e2b, 0 6px 16px rgba(0,0,0,0.4);
+    background: linear-gradient(145deg, #c9a87c, #9b7a52);
+}
+@keyframes starPulse {
+    0% { opacity: 0.7; transform: scale(1); text-shadow: 0 1px 1px #3a2a1a; }
+    50% { opacity: 1; transform: scale(1.02); text-shadow: 0 0 8px gold; box-shadow: 0 5px 0 #5e3e2b, 0 0 12px gold; }
+    100% { opacity: 0.7; transform: scale(1); text-shadow: 0 1px 1px #3a2a1a; }
+}
+
+.easter-egg-note {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 280px;
+    max-width: 80vw;
+    background: #fff9e8;
+    border: 1px solid #b28b5e;
+    border-radius: 10px 20px 10px 20px;
+    padding: 20px;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.3), 0 0 0 4px #f7e9d7;
+    z-index: 10000;  /* 确保在最上层 */
+    text-align: center;
+    font-family: 'Caveat', '华文楷体', cursive;
+    color: #3a2a1a;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.easter-egg-note.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;  /* 允许点击关闭按钮 */
+}
+
+/* 便签关闭按钮 - 明确居右 */
+.easter-egg-note .close-note {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #b28b5e;
+    transition: 0.2s;
+    line-height: 1;
+    background: transparent;
+    border: none;
+    width: auto;
+    height: auto;
+}
+.easter-egg-note .close-note:hover {
+    color: #ffaa33;
+    transform: scale(1.1);
+}
 	
 	</style>
 </head>
@@ -3757,6 +3835,28 @@ function showProgress() {
  if (modalContent) {
         modalContent.scrollTop = 0;
     }
+	
+	
+	// 在信物区域下方添加彩蛋（如果条件满足）
+const allStarsCollected = stars === 6;
+const allItemsCollected = itemsCollected.every(v => v === true);
+if (allStarsCollected && allItemsCollected) {
+    // 移除可能已存在的彩蛋容器，避免重复
+    let existingEgg = document.getElementById('easterEggInAlbum');
+    if (existingEgg) existingEgg.remove();
+
+    const eggContainer = document.createElement('div');
+    eggContainer.id = 'easterEggInAlbum';
+    eggContainer.style.textAlign = 'center';
+    eggContainer.style.margin = '20px 0 10px';
+    eggContainer.innerHTML = '<div class="easter-egg-star">✨ 制作者的话 ✨</div>';
+    modalContent.appendChild(eggContainer);
+
+    const eggStar = eggContainer.querySelector('.easter-egg-star');
+    eggStar.addEventListener('click', function() {
+        showEasterNote();
+    });
+}
 
     modal.style.display = 'flex';
 	
@@ -3783,6 +3883,39 @@ window.addEventListener('click', function(e) {
 
 // 为星星计数按钮添加点击事件
 document.getElementById('starsCounter').addEventListener('click', showProgress);
+		
+		
+function showEasterNote() {
+    let note = document.getElementById('easterNote');
+    if (note) {
+        note.classList.add('show');
+        return;
+    }
+
+    note = document.createElement('div');
+    note.id = 'easterNote';
+    note.className = 'easter-egg-note';
+    note.innerHTML = `
+    <div class="close-note">&times;</div>
+    <p style="margin-bottom: 12px;">🦊 致发现这个秘密的你</p>
+    <p>这个网页里藏着许多设计时的小心思，还有一些未能完全展开的彩蛋解析。</p>
+    <p>我不太想直接告诉你，毕竟这些文字可能完全是我自己的臆想，我也并不确定你是不是真的感兴趣。不过如果你真的很好奇，可以来问我。</p>
+    <p style="margin-top: 16px; font-style: italic;">—— 苏颀</p>
+`;
+    document.body.appendChild(note);
+    setTimeout(() => note.classList.add('show'), 10);
+    note.querySelector('.close-note').addEventListener('click', () => {
+        note.classList.remove('show');
+        setTimeout(() => note.remove(), 300);
+    });
+    note.addEventListener('click', (e) => {
+        if (e.target === note) {
+            note.classList.remove('show');
+            setTimeout(() => note.remove(), 300);
+        }
+    });
+}
+		
 		
 		
 		// 生成童年星球的漂浮金色粒子
@@ -4542,6 +4675,9 @@ if (foxEgg) {
     foxEgg.style.transition = '';
 }
 				mirrorContent = '';
+				
+				const eggInAlbum = document.getElementById('easterEggInAlbum');
+if (eggInAlbum) eggInAlbum.remove();
                 // 回到序幕
                 goToPage('pagePrologue');
 				// 隐藏彩蛋页入口（麦穗图标）
