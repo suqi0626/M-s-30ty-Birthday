@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>B-612号宇宙漫游指南</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-	<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=VT323&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Playfair+Display:wght@400;600&family=Lora:wght@400;600&family=Crimson+Text:ital@0;1&family=Noto+Serif+SC:wght@400;600&family=Caveat:wght@400;700&family=VT323&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Playfair+Display:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -739,13 +737,11 @@ font-weight: 600; /* 适当加粗 */
 
 .mirror-frame {
     position: relative;
-    width: 100%;
-    max-width: 500px;
+    width: min(100%, 500px);
     height: 600px;          /* 可根据边框图片比例调整 */
     margin: 5px auto 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     cursor: pointer;
     /* 移除原来的 background-image 和 box-shadow，背景由图片提供 */
     background: none;
@@ -754,6 +750,20 @@ font-weight: 600; /* 适当加粗 */
 }
 
 /* 边框图片作为前景 */
+.mirror-frame::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 12% 20% 10% 20%;
+    border-radius: 34px;
+    pointer-events: none;
+    background:
+        linear-gradient(140deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.06) 22%, rgba(255, 255, 255, 0) 42%, rgba(255, 220, 140, 0.08) 100%),
+        radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.20) 0%, rgba(255, 255, 255, 0) 40%);
+    mix-blend-mode: screen;
+    opacity: 0.75;
+}
+
 .mirror-border {
     position: absolute;
     top: 0;
@@ -805,6 +815,119 @@ font-weight: 600; /* 适当加粗 */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cleanup overrides for conflicted legacy rules */
+.container::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: auto;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-image: url('http://m-birthday-music.test.upcdn.net/xiabianxian.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.9;
+    transform: translateY(7px);
+    filter: drop-shadow(0 -4px 6px rgba(0, 0, 0, 0.6))
+            drop-shadow(0 0 2px #b28b5e)
+            drop-shadow(0 0 5px #ffd966);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%);
+}
+
+.mirror-frame {
+    width: min(100%, 500px);
+    height: min(600px, 72vh);
+    display: grid;
+    place-items: center;
+}
+
+.mirror-frame::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    inset: 12% 20% 10% 20%;
+    border-radius: 34px;
+    pointer-events: none;
+    background:
+        linear-gradient(140deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.06) 22%, rgba(255, 255, 255, 0) 42%, rgba(255, 220, 140, 0.08) 100%),
+        radial-gradient(circle at 72% 18%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 40%);
+    mix-blend-mode: screen;
+    opacity: 0.75;
+}
+
+.mirror-border {
+    z-index: 3;
+}
+
+.mirror-text {
+    z-index: 2;
+    padding: 18px 14px;
+    font-size: 0.82rem;
+    color: #f6d97a;
+    line-height: 1.95;
+    overflow-x: hidden;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 228, 170, 0.35);
+    background:
+        linear-gradient(160deg, rgba(20, 24, 36, 0.18) 0%, rgba(28, 18, 18, 0.1) 50%, rgba(20, 14, 10, 0.16) 100%),
+        radial-gradient(circle at 25% 18%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 44%),
+        radial-gradient(circle at 76% 78%, rgba(255, 214, 160, 0.09) 0%, rgba(255, 214, 160, 0) 52%);
+    box-shadow:
+        inset 0 0 36px rgba(12, 10, 20, 0.35),
+        inset 0 -8px 28px rgba(0, 0, 0, 0.25),
+        0 10px 22px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(4px) saturate(1.15);
+    -webkit-backdrop-filter: blur(4px) saturate(1.15);
+    text-shadow: 0 0 6px rgba(255, 223, 124, 0.65), 0 1px 2px rgba(0, 0, 0, 0.7);
+    isolation: isolate;
+}
+
+.mirror-text::before {
+    content: '';
+    position: absolute;
+    inset: -24% -40%;
+    pointer-events: none;
+    background: linear-gradient(
+        115deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.16) 48%,
+        rgba(255, 255, 255, 0.05) 55%,
+        transparent 63%
+    );
+    transform: translateX(-28%);
+    animation: mirrorSheen 8s ease-in-out infinite;
+}
+
+.mirror-text::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.32);
+}
+
+@keyframes mirrorSheen {
+    0%, 100% { transform: translateX(-28%); }
+    50% { transform: translateX(18%); }
+}
+
+@media (max-width: 480px) {
+    .mirror-frame {
+        height: min(560px, 70vh);
+    }
+
+    .mirror-text {
+        width: 62%;
+        font-size: 0.78rem;
+        line-height: 1.85;
+    }
 }
 
 .fox-illustration {
@@ -3493,7 +3616,7 @@ font-weight: 600; /* 适当加粗 */
 
     <!-- ========== 狐狸星球（彩蛋） ========== -->
     <section class="page" id="pageFox">
-        <div class="container"">
+<div class="container">
            
 			
 			<img src="http://m-birthday-music.test.upcdn.net/tcaidan.png" 
@@ -4255,16 +4378,20 @@ if (pageId === 'pageFox') {
     }
 
     window.scrollTo(0, 0);
+    if (pageId === 'pageFinal') {
+        document.getElementById('mirrorScene').style.display = 'none';
+    }
 
     // 结局页特殊处理（保留）
     if (pageId === 'pageFinal' && stars === 6) {
         document.getElementById('wheatEgg').classList.add('show');
-        document.getElementById('mirrorScene').style.display = 'block';
+        document.getElementById('mirrorScene').style.display = 'none';
         mirrorContent = generateFinalText();
         mirrorRevealed = false;
         const mirrorTextDiv = document.getElementById('finalMirror');
         mirrorTextDiv.innerHTML = '✨ 触摸镜子，看见自己 ✨';
         mirrorTextDiv.style.opacity = '1';
+        document.getElementById('mirrorScene').style.display = 'none';
     } else if (pageId === 'pageFinal') {
         const mirrorTextDiv = document.getElementById('finalMirror');
         mirrorTextDiv.innerHTML = '你尚未集齐六颗星星，无法看见完整的自己。<br>继续探索吧。';
@@ -4287,7 +4414,6 @@ if (pageId === 'pageFox') {
             else if (num === 6) goToPage('pagePlanet6');
             else if (num === 7) {
                 goToPage('pageFinal');
-                generateFinalText(); // 生成镜子文字
             }
         }
 
@@ -4502,6 +4628,7 @@ if (musicPlaying) {
 
     setTimeout(() => {
         mirrorTextDiv.innerHTML = mirrorContent;
+        document.getElementById('mirrorScene').style.display = 'block';
         mirrorTextDiv.style.opacity = '1';
         // 为每个段落添加逐行动画延迟
         const paragraphs = mirrorTextDiv.querySelectorAll('p');
@@ -4527,7 +4654,6 @@ if (musicPlaying) {
         一个藏起来却始终被看见的人。<br>
         一个值得被好好对待的人。</p>
     `;
-    console.log('mirrorContent:', text);  // 添加日志，确保内容完整
     return text;
 }
 
